@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://byq4tcqbjhqel"]
+
+[ext_resource type="PackedScene" uid="uid://pbmyh1qru7p" path="res://characters/happy_boo/happy_boo.tscn" id="1_dbxlc"]
+[ext_resource type="Script" path="res://player.gd" id="1_gwi1d"]
+[ext_resource type="PackedScene" uid="uid://kdysff1gekjp" path="res://Gun.tscn" id="3_pjx3w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k87qg"]
+radius = 42.0119
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x6p15"]
+radius = 48.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tttt4"]
+bg_color = Color(0.233049, 0.24354, 0.246057, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ar128"]
+bg_color = Color(0.647059, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 5
+script = ExtResource("1_gwi1d")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="HappyBoo" parent="." instance=ExtResource("1_dbxlc")]
+unique_name_in_owner = true
+position = Vector2(-3, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5, -43)
+shape = SubResource("CircleShape2D_k87qg")
+
+[node name="Gun" parent="." instance=ExtResource("3_pjx3w")]
+position = Vector2(1, -24)
+
+[node name="Hitbox" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-5, -44)
+shape = SubResource("CircleShape2D_x6p15")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.988235, 0, 0, 1)
+offset_left = -58.0
+offset_top = -123.0
+offset_right = 54.0
+offset_bottom = -96.0
+theme_override_styles/background = SubResource("StyleBoxFlat_tttt4")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ar128")
+value = 100.0
+show_percentage = false

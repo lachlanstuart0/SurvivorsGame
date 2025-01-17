@@ -1,0 +1,6 @@
+res://game.tscn
+res://game.gd
+res://master_scene.tscn
+res://player.tscn
+res://enemy.gd
+res://master_scene.gd

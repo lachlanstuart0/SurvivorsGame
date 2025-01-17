@@ -1,0 +1,121 @@
+[gd_scene load_steps=5 format=3 uid="uid://nx04iyu4u1my"]
+
+[ext_resource type="PackedScene" uid="uid://byq4tcqbjhqel" path="res://player.tscn" id="1_qmube"]
+[ext_resource type="Script" path="res://game.gd" id="1_tq7a4"]
+[ext_resource type="PackedScene" uid="uid://tdradgtkpvox" path="res://tree.tscn" id="2_ruqil"]
+
+[sub_resource type="Curve2D" id="Curve2D_e2vgq"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -173, -173, 0, 0, 0, 0, 2110, -198, 0, 0, 0, 0, 2110, 1126, 0, 0, 0, 0, -195, 1154, 0, 0, 0, 0, -173, -173)
+}
+point_count = 5
+
+[node name="Game" type="Node2D"]
+process_mode = 1
+y_sort_enabled = true
+script = ExtResource("1_tq7a4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_left = -2.0
+offset_top = 3.0
+offset_right = 1928.0
+offset_bottom = 1082.0
+color = Color(0.721569, 1, 0.721569, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_qmube")]
+position = Vector2(847, 529)
+
+[node name="Path2D" type="Path2D" parent="Player"]
+position = Vector2(-851.861, -462.444)
+scale = Vector2(0.990456, 0.967456)
+curve = SubResource("Curve2D_e2vgq")
+
+[node name="MobSpawn" type="PathFollow2D" parent="Player/Path2D"]
+unique_name_in_owner = true
+position = Vector2(-173, -173)
+rotation = -0.0109501
+
+[node name="Tree1" parent="." instance=ExtResource("2_ruqil")]
+position = Vector2(422, 515)
+
+[node name="Tree2" parent="." instance=ExtResource("2_ruqil")]
+position = Vector2(766, 151)
+
+[node name="Tree3" parent="." instance=ExtResource("2_ruqil")]
+position = Vector2(218, 773)
+
+[node name="Tree4" parent="." instance=ExtResource("2_ruqil")]
+position = Vector2(1143, 443)
+
+[node name="Tree5" parent="." instance=ExtResource("2_ruqil")]
+position = Vector2(797, 923)
+
+[node name="Tree6" parent="." instance=ExtResource("2_ruqil")]
+position = Vector2(339, 189)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.6
+autostart = true
+
+[node name="Stopwatch" type="Timer" parent="."]
+autostart = true
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
+offset_left = 18.0
+offset_top = 18.0
+offset_right = 237.0
+offset_bottom = 88.0
+
+[node name="KillLabel" type="Label" parent="CanvasLayer2/ColorRect"]
+layout_mode = 0
+offset_right = 75.0
+offset_bottom = 69.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 51
+text = "Kills:"
+
+[node name="KillCount" type="Label" parent="CanvasLayer2/ColorRect"]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 3.0
+offset_right = 217.0
+offset_bottom = 73.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 51
+horizontal_alignment = 2
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer2"]
+offset_left = 18.0
+offset_top = 95.0
+offset_right = 314.0
+offset_bottom = 164.0
+
+[node name="TimeLabel" type="Label" parent="CanvasLayer2/ColorRect2"]
+layout_mode = 0
+offset_right = 75.0
+offset_bottom = 69.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 51
+text = "Time:"
+
+[node name="TimeCount" type="Label" parent="CanvasLayer2/ColorRect2"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 149.0
+offset_top = 1.0
+offset_right = 295.0
+offset_bottom = 71.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 51
+horizontal_alignment = 2
+
+[connection signal="playerDeath" from="." to="." method="_on_player_death"]
+[connection signal="healthDepleted" from="Player" to="." method="_on_player_health_depleted"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Stopwatch" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Stopwatch" to="." method="_on_stopwatch_timeout"]
