@@ -48,9 +48,10 @@ func spawn_tree( basePos, count):
 
 func _on_timer_timeout() -> void:
 	spawn_mob()
-	var treeCount = rng.randi_range(0,4)
+	var treeCount = rng.randi_range(0,2)
 	%MobSpawn.progress_ratio = randf()
-	spawn_tree(%MobSpawn.progress_ratio,treeCount)
+	if powerupCount % 2 == 0:
+		spawn_tree(%MobSpawn.progress_ratio,treeCount)
 	powerupCount +=1
 	if powerupCount >= 20:
 		spawn_powerup("Invince")
