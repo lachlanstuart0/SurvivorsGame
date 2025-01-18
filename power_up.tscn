@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://cv50gssjrey66"]
+
+[ext_resource type="Texture2D" uid="uid://xco67mp3chw2" path="res://star.png" id="1_7eyxk"]
+[ext_resource type="Script" path="res://power_up.gd" id="1_jwwgs"]
+
+[sub_resource type="Animation" id="Animation_3qurn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8uc4i"]
+resource_name = "bob"
+length = 2.0
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 2.38), Vector2(0, 0), Vector2(0, -2.305)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6hl3s"]
+_data = {
+"RESET": SubResource("Animation_3qurn"),
+"bob": SubResource("Animation_8uc4i")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ny64k"]
+
+[node name="PowerUp" type="StaticBody2D"]
+scale = Vector2(4.69, 4.69)
+collision_layer = 9
+script = ExtResource("1_jwwgs")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_6hl3s")
+}
+
+[node name="hitbox" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_ny64k")
+debug_color = Color(0.654756, 0.522298, 0.814552, 0.937255)
+
+[node name="Star" type="Sprite2D" parent="hitbox"]
+position = Vector2(-1, -1)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_7eyxk")

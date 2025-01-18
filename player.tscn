@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://byq4tcqbjhqel"]
+[gd_scene load_steps=9 format=3 uid="uid://byq4tcqbjhqel"]
 
 [ext_resource type="PackedScene" uid="uid://pbmyh1qru7p" path="res://characters/happy_boo/happy_boo.tscn" id="1_dbxlc"]
 [ext_resource type="Script" path="res://player.gd" id="1_gwi1d"]
 [ext_resource type="PackedScene" uid="uid://kdysff1gekjp" path="res://Gun.tscn" id="3_pjx3w"]
+[ext_resource type="PackedScene" uid="uid://b84i1r2x28qhg" path="res://invince_timer.tscn" id="4_mtluj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k87qg"]
 radius = 42.0119
@@ -25,7 +26,7 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 5
+collision_mask = 13
 script = ExtResource("1_gwi1d")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -61,3 +62,25 @@ theme_override_styles/background = SubResource("StyleBoxFlat_tttt4")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ar128")
 value = 100.0
 show_percentage = false
+
+[node name="PickupBox" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupBox"]
+position = Vector2(-5, -44)
+shape = SubResource("CircleShape2D_x6p15")
+
+[node name="Invince" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(4, 13)
+scale = Vector2(1.20792, 1.18557)
+color = Color(1, 1, 0.4, 0.439216)
+polygon = PackedVector2Array(-6, 4, 23, -3, 38, -22, 45, -50, 36, -71, 14, -88, -13, -93, -36, -83, -48, -69, -56, -47, -50, -24, -41, -11, -30, -3, -14, 3)
+
+[node name="InvinceTimer" parent="Invince" instance=ExtResource("4_mtluj")]
+unique_name_in_owner = true
+
+[connection signal="timeout" from="Invince/InvinceTimer" to="." method="_on_invince_timer_timeout"]

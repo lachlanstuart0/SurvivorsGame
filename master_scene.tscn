@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxcpeyhdcakgk"]
+[gd_scene load_steps=7 format=3 uid="uid://bxcpeyhdcakgk"]
 
 [ext_resource type="PackedScene" uid="uid://nx04iyu4u1my" path="res://game.tscn" id="1_uewdv"]
 [ext_resource type="Script" path="res://master_scene.gd" id="1_x1n4q"]
+[ext_resource type="Texture2D" uid="uid://t4pskhp72xmv" path="res://musicNote.png" id="3_hjeo7"]
+[ext_resource type="Texture2D" uid="uid://ceq7ckiogulmh" path="res://lightning.png" id="4_waj4b"]
+[ext_resource type="Texture2D" uid="uid://f82e5sb4voeu" path="res://brain.png" id="5_5tdn2"]
 
 [sub_resource type="SystemFont" id="SystemFont_8yi3b"]
 font_weight = 475
@@ -14,12 +17,15 @@ script = ExtResource("1_x1n4q")
 [node name="Game" parent="." instance=ExtResource("1_uewdv")]
 unique_name_in_owner = true
 
-[node name="GameOver" type="CanvasLayer" parent="."]
+[node name="AllMenus" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="GameOver" type="CanvasLayer" parent="AllMenus"]
 unique_name_in_owner = true
 process_mode = 2
 visible = false
 
-[node name="ColorRect" type="ColorRect" parent="GameOver"]
+[node name="ColorRect" type="ColorRect" parent="AllMenus/GameOver"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -27,7 +33,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.823529)
 
-[node name="Label" type="Label" parent="GameOver/ColorRect"]
+[node name="Label" type="Label" parent="AllMenus/GameOver/ColorRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -48,7 +54,7 @@ theme_override_fonts/font = SubResource("SystemFont_8yi3b")
 theme_override_font_sizes/font_size = 265
 text = "GAME OVER"
 
-[node name="Restart" type="Button" parent="GameOver"]
+[node name="Restart" type="Button" parent="AllMenus/GameOver"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -66,5 +72,277 @@ theme_override_constants/outline_size = 40
 theme_override_font_sizes/font_size = 151
 text = "Play Again?"
 
+[node name="MainMenuLayer" type="CanvasLayer" parent="AllMenus"]
+unique_name_in_owner = true
+
+[node name="MainMenuBG" type="ColorRect" parent="AllMenus/MainMenuLayer"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.244776, 0.244776, 0.244776, 1)
+
+[node name="MainMenuTitle" type="Label" parent="AllMenus/MainMenuLayer/MainMenuBG"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -11.5
+offset_right = 46.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.662745, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 20
+theme_override_fonts/font = SubResource("SystemFont_8yi3b")
+theme_override_font_sizes/font_size = 265
+text = "Lachlan Game"
+
+[node name="Start" type="Button" parent="AllMenus/MainMenuLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = 163.0
+offset_right = 516.0
+offset_bottom = 378.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.64, 1)
+theme_override_colors/font_color = Color(0, 0.415686, 0, 1)
+theme_override_constants/outline_size = 40
+theme_override_font_sizes/font_size = 151
+text = "Start"
+
+[node name="Quit" type="Button" parent="AllMenus/MainMenuLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 708.0
+offset_top = 314.0
+offset_right = 1070.0
+offset_bottom = 529.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.64, 1)
+theme_override_colors/font_color = Color(0, 0.415686, 0, 1)
+theme_override_constants/outline_size = 40
+theme_override_font_sizes/font_size = 151
+text = "Quit"
+
+[node name="CharSelect" type="CanvasLayer" parent="AllMenus"]
+unique_name_in_owner = true
+layer = 2
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="AllMenus/CharSelect"]
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.675937, 0.446006, 0.649912, 1)
+
+[node name="Title" type="Label" parent="AllMenus/CharSelect"]
+z_index = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -546.0
+offset_top = 49.0
+offset_right = 546.0
+offset_bottom = 221.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0.627451, 0.705882, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 0
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 111
+text = "CHARACTER SELECT"
+
+[node name="Gavin" type="ColorRect" parent="AllMenus/CharSelect"]
+z_index = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 96.0
+offset_top = -152.0
+offset_right = 436.0
+offset_bottom = 152.0
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+
+[node name="Label" type="Label" parent="AllMenus/CharSelect/Gavin"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -132.5
+offset_right = 132.5
+offset_bottom = 132.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 96
+text = "Gavin"
+
+[node name="MusicNote" type="Sprite2D" parent="AllMenus/CharSelect/Gavin"]
+position = Vector2(173, 183)
+scale = Vector2(2.42, 2.42)
+texture = ExtResource("3_hjeo7")
+
+[node name="SelectGavin" type="Button" parent="AllMenus/CharSelect/Gavin"]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 1
+layout_mode = 0
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 339.0
+offset_bottom = 310.0
+
+[node name="Label2" type="Label" parent="AllMenus/CharSelect/Gavin"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -126.667
+offset_top = 310.833
+offset_right = 138.333
+offset_bottom = 442.833
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 96
+text = "Sonic 
+Damage"
+
+[node name="Waldo" type="ColorRect" parent="AllMenus/CharSelect"]
+z_index = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -170.0
+offset_top = -152.0
+offset_right = 170.0
+offset_bottom = 152.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+
+[node name="Label" type="Label" parent="AllMenus/CharSelect/Waldo"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -132.5
+offset_right = 132.5
+offset_bottom = 132.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 96
+text = "Waldo"
+
+[node name="Lightning" type="Sprite2D" parent="AllMenus/CharSelect/Waldo"]
+position = Vector2(171, 197)
+scale = Vector2(1.36, 1.36)
+texture = ExtResource("4_waj4b")
+
+[node name="SelectWaldo" type="Button" parent="AllMenus/CharSelect/Waldo"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 339.0
+offset_bottom = 310.0
+
+[node name="Label2" type="Label" parent="AllMenus/CharSelect/Waldo"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -135.0
+offset_top = 305.834
+offset_right = 130.0
+offset_bottom = 437.834
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 96
+text = "Electric
+Damage"
+
+[node name="JR not Jr" type="ColorRect" parent="AllMenus/CharSelect"]
+z_index = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -452.0
+offset_top = -152.0
+offset_right = -112.0
+offset_bottom = 152.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+
+[node name="Label" type="Label" parent="AllMenus/CharSelect/JR not Jr"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -132.5
+offset_right = 132.5
+offset_bottom = 132.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 75
+text = "JR not Jr."
+
+[node name="Brain" type="Sprite2D" parent="AllMenus/CharSelect/JR not Jr"]
+position = Vector2(172, 183)
+scale = Vector2(1.8075, 1.8075)
+texture = ExtResource("5_5tdn2")
+
+[node name="SelectJR" type="Button" parent="AllMenus/CharSelect/JR not Jr"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 339.0
+offset_bottom = 310.0
+
+[node name="Label2" type="Label" parent="AllMenus/CharSelect/JR not Jr"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -135.0
+offset_top = 305.833
+offset_right = 130.0
+offset_bottom = 437.833
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 96
+text = "Psychic
+Damage"
+
 [connection signal="playerDeath" from="Game" to="." method="_on_game_player_death"]
-[connection signal="pressed" from="GameOver/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="AllMenus/GameOver/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="AllMenus/MainMenuLayer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="AllMenus/MainMenuLayer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="AllMenus/CharSelect/Gavin/SelectGavin" to="." method="_on_select_gavin_pressed"]
+[connection signal="pressed" from="AllMenus/CharSelect/Waldo/SelectWaldo" to="." method="_on_select_waldo_pressed"]
+[connection signal="pressed" from="AllMenus/CharSelect/JR not Jr/SelectJR" to="." method="_on_select_jr_pressed"]
