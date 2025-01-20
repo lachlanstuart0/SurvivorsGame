@@ -3,6 +3,10 @@ extends Node2D
 var rng = RandomNumberGenerator.new()
 signal playerDeath
 var powerupCount = 0
+var enemyLimit = 125
+@onready var enemyCount = get_node("/root/MasterScene/Game/InGameUI/ColorRect3/EnemyCount")
+var playerLevel = 1
+@onready var levelCount = get_node("/root/MasterScene/Game/InGameUI/ColorRect4/LevelCount")
 
 
 func _ready():
@@ -19,6 +23,7 @@ func spawn_mob():
 	%MobSpawn.progress_ratio = randf()
 	newMob.global_position = %MobSpawn.global_position
 	add_child(newMob)
+	enemyCount.text = str(int(enemyCount.text)+1)
 	
 func spawn_powerup(type: String):
 	var newPowerup = preload("res://power_up.tscn").instantiate()
@@ -46,24 +51,58 @@ func spawn_tree( basePos, count):
 		add_child(newTree)
 	
 
+#Timer for spawning Objects, enemies, "trees", powerups
 func _on_timer_timeout() -> void:
-	spawn_mob()
+	#Spawn mobs based on player level
+	if int(enemyCount.text) < enemyLimit:
+		spawn_mob()
+		if playerLevel > 5:
+			spawn_mob()
+			if playerLevel > 10:
+				spawn_mob()
+				spawn_mob()
+	#Spawn Trees
 	var treeCount = rng.randi_range(0,2)
 	%MobSpawn.progress_ratio = randf()
 	if powerupCount % 2 == 0:
 		spawn_tree(%MobSpawn.progress_ratio,treeCount)
 	powerupCount +=1
+	#Spawn powerups based on count up to 20
 	if powerupCount >= 20:
 		spawn_powerup("Invince")
 		powerupCount = 0
+	if powerupCount == 15:
+		var kids = get_children()
+		var enemiesInRange = get_node("sightRange").get_overlapping_bodies()
+		for kid in kids:
+			if kid.get_class() == "CharacterBody2D" and kid not in enemiesInRange:
+				if kid.name != "Player":
+					kid.queue_free()
+					spawn_mob()
+					
+	
 	
 
 
 func _on_player_health_depleted() -> void:
 	playerDeath.emit()	
-
-
 func _on_stopwatch_timeout() -> void:
-	%TimeCount.text = str(int(%TimeCount.text)+1)
-	
+	%TimeCount.text = str(int(%TimeCount.text)+1)	
+func _on_speed_up_pressed() -> void:
+	%LevelUpScreen.visible = false
+	get_tree().paused = false
+func _on_shoot_speed_up_pressed() -> void:
+	%LevelUpScreen.visible = false
+	get_tree().paused = false
+func _on_new_weapon_pressed() -> void:
+	%LevelUpScreen.visible = false
+	get_tree().paused = false
+func _on_player_level_up() -> void:
+	%LevelUpScreen.visible = true
+	get_tree().paused = true
+	playerLevel +=1
+	levelCount.text = str(playerLevel)
+	enemyLimit += 25
+	if %Timer.wait_time > 0.05:
+		%Timer.wait_time -= 0.05
 	

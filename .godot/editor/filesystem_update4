@@ -1,10 +1,9 @@
-res://power_up.tscn
-res://master_scene.gd
+res://game.tscn
+res://game.gd
 res://master_scene.tscn
 res://player.tscn
 res://enemy.tscn
-res://game.tscn
-res://characters/happy_boo/happy_boo.tscn
+res://power_up.tscn
 res://Bullet.tscn
 res://tree.tscn
-res://game.gd
+res://gun.tscn

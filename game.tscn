@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://nx04iyu4u1my"]
+[gd_scene load_steps=8 format=3 uid="uid://nx04iyu4u1my"]
 
 [ext_resource type="PackedScene" uid="uid://byq4tcqbjhqel" path="res://player.tscn" id="1_qmube"]
 [ext_resource type="Script" path="res://game.gd" id="1_tq7a4"]
@@ -10,6 +10,12 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -173, -173, 0, 0, 0, 0, 2110, -198, 0, 0, 0, 0, 2110, 1126, 0, 0, 0, 0, -195, 1154, 0, 0, 0, 0, -173, -173)
 }
 point_count = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8daul"]
+bg_color = Color(0.783523, 0.783523, 0.783523, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ynpi3"]
+size = Vector2(1943, 1097)
 
 [node name="Game" type="Node2D"]
 process_mode = 1
@@ -57,23 +63,8 @@ rotation = -0.0109501
 [node name="Tree1" parent="." instance=ExtResource("2_ruqil")]
 position = Vector2(422, 515)
 
-[node name="Tree2" parent="." instance=ExtResource("2_ruqil")]
-position = Vector2(766, 151)
-
-[node name="Tree3" parent="." instance=ExtResource("2_ruqil")]
-position = Vector2(218, 773)
-
-[node name="Tree4" parent="." instance=ExtResource("2_ruqil")]
-position = Vector2(1143, 443)
-
-[node name="Tree5" parent="." instance=ExtResource("2_ruqil")]
-position = Vector2(797, 923)
-
-[node name="Tree6" parent="." instance=ExtResource("2_ruqil")]
-position = Vector2(339, 189)
-
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.6
+unique_name_in_owner = true
 autostart = true
 
 [node name="Stopwatch" type="Timer" parent="."]
@@ -81,7 +72,6 @@ autostart = true
 
 [node name="InGameUI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="InGameUI"]
 offset_left = 18.0
@@ -132,8 +122,132 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 51
 horizontal_alignment = 2
 
+[node name="ColorRect3" type="ColorRect" parent="InGameUI"]
+offset_left = 18.0
+offset_top = 249.0
+offset_right = 465.0
+offset_bottom = 319.0
+
+[node name="EnemyCountLabel" type="Label" parent="InGameUI/ColorRect3"]
+layout_mode = 0
+offset_right = 75.0
+offset_bottom = 69.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 51
+text = "EnemyCount:"
+
+[node name="EnemyCount" type="Label" parent="InGameUI/ColorRect3"]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 5.0
+offset_right = 446.0
+offset_bottom = 75.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 51
+horizontal_alignment = 2
+
+[node name="ColorRect4" type="ColorRect" parent="InGameUI"]
+offset_left = 18.0
+offset_top = 169.0
+offset_right = 314.0
+offset_bottom = 239.0
+
+[node name="LevelLabel" type="Label" parent="InGameUI/ColorRect4"]
+layout_mode = 0
+offset_right = 75.0
+offset_bottom = 69.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 51
+text = "Level:"
+
+[node name="LevelCount" type="Label" parent="InGameUI/ColorRect4"]
+layout_mode = 0
+offset_left = 185.0
+offset_right = 295.0
+offset_bottom = 70.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 51
+text = "1"
+horizontal_alignment = 2
+
+[node name="LevelUpScreen" type="CanvasLayer" parent="InGameUI"]
+unique_name_in_owner = true
+process_mode = 2
+layer = 2
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="InGameUI/LevelUpScreen"]
+offset_left = 2.0
+offset_right = 1922.0
+offset_bottom = 1108.0
+color = Color(0.18359, 0.18359, 0.18359, 0.67451)
+
+[node name="Label" type="Label" parent="InGameUI/LevelUpScreen"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -297.0
+offset_right = 297.0
+offset_bottom = 179.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.826814, 0.857828, 3.85046e-07, 1)
+theme_override_font_sizes/font_size = 126
+text = "LEVEL UP!"
+
+[node name="SpeedUp" type="Button" parent="InGameUI/LevelUpScreen"]
+offset_left = 325.0
+offset_top = 360.0
+offset_right = 658.0
+offset_bottom = 639.0
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 71
+theme_override_styles/normal = SubResource("StyleBoxFlat_8daul")
+text = "Speed Up"
+
+[node name="ShootSpeedUp" type="Button" parent="InGameUI/LevelUpScreen"]
+offset_left = 801.0
+offset_top = 365.0
+offset_right = 1134.0
+offset_bottom = 644.0
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 71
+theme_override_styles/normal = SubResource("StyleBoxFlat_8daul")
+text = "Shoot
+Speed Up"
+
+[node name="NewWeapon" type="Button" parent="InGameUI/LevelUpScreen"]
+offset_left = 1295.0
+offset_top = 368.0
+offset_right = 1628.0
+offset_bottom = 647.0
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 71
+theme_override_styles/normal = SubResource("StyleBoxFlat_8daul")
+text = "New
+Weapon"
+
+[node name="sightRange" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="sightRange"]
+position = Vector2(961.5, 538.5)
+shape = SubResource("RectangleShape2D_ynpi3")
+
 [connection signal="playerDeath" from="." to="." method="_on_player_death"]
 [connection signal="healthDepleted" from="Player" to="." method="_on_player_health_depleted"]
+[connection signal="levelUp" from="Player" to="." method="_on_player_level_up"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="Stopwatch" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Stopwatch" to="." method="_on_stopwatch_timeout"]
+[connection signal="timeout" from="Stopwatch" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="InGameUI/LevelUpScreen/SpeedUp" to="." method="_on_speed_up_pressed"]
+[connection signal="pressed" from="InGameUI/LevelUpScreen/SpeedUp" to="Player" method="_on_speed_up_pressed"]
+[connection signal="pressed" from="InGameUI/LevelUpScreen/ShootSpeedUp" to="." method="_on_shoot_speed_up_pressed"]
+[connection signal="pressed" from="InGameUI/LevelUpScreen/ShootSpeedUp" to="Player" method="_on_shoot_speed_up_pressed"]
+[connection signal="pressed" from="InGameUI/LevelUpScreen/NewWeapon" to="." method="_on_new_weapon_pressed"]
+[connection signal="pressed" from="InGameUI/LevelUpScreen/NewWeapon" to="Player" method="_on_new_weapon_pressed"]

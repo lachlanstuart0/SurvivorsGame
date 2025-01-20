@@ -14,7 +14,7 @@ func shoot():
 	var newBullet = BULLET.instantiate()
 	newBullet.global_position = %BulletSpawn.global_position
 	newBullet.global_rotation = %BulletSpawn.global_rotation
-
+	%GunSound.play(0)
 	%BulletSpawn.add_child(newBullet)
 	
 	
